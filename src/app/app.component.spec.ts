@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -20,10 +21,30 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('testes-angular');
   });
 
-  it('should render title', () => {
+  fit('shoud apply the value in an input and show the exit after click', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, testes-angular');
+    const inputDebugElement = fixture.debugElement.query(
+      By.css('[data-testid="input"]')
+    );
+    expect(inputDebugElement).toBeTruthy();
+    const mockInputValue = 'Fake input value';
+    inputDebugElement.triggerEventHandler('input', {
+      target: {
+        value: mockInputValue,
+      },
+    });
+
+    const btnDebugelement = fixture.debugElement.query(
+      By.css('[data-testid="button"]')
+    );
+    btnDebugelement.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    const outputDebugElement = fixture.debugElement.query(
+      By.css('[data-testid="output"]')
+    );
+    expect(outputDebugElement.nativeElement.textContent).toContain(
+      mockInputValue
+    );
   });
 });

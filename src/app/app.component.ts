@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodosService } from './_services/todos.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'testes-angular';
-
+  public inputValue: string = '';
+  outputValue: string = '';
+  onClick() {
+    this.outputValue = this.inputValue;
+  }
   /**
    *
    */
