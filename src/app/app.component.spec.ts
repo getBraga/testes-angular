@@ -21,7 +21,7 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('testes-angular');
   });
 
-  fit('shoud apply the value in an input and show the exit after click', () => {
+  it('shoud apply the value in an input and show the exit after click', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const inputDebugElement = fixture.debugElement.query(
